@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Mobile Utilities | Full Native Power, Zero Installation</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131b2e;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 680px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Value Propositions Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 50px;
+        }
+
+        .benefit-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .benefit-card h3 {
+            font-size: 0.95rem;
+            color: #60a5fa;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .benefit-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Apps Catalog Grid */
+        .apps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 960px;
+            margin-bottom: 30px;
+        }
+
+        .app-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 40px -15px var(--accent-glow);
+        }
+
+        .app-icon {
+            width: 84px;
+            height: 84px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin: 0 auto 18px auto;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .app-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: opacity 0.2s;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Smart Mobile Utilities</h1>
+        <p>Get full native-app performance and tools instantly on your device—with no heavy store downloads and complete user privacy control.</p>
+    </div>
+
+    <!-- Key Benefits (PWA Highlights without jargon) -->
+    <div class="benefits-grid">
+        <div class="benefit-card">
+            <h3>⚡ No Installation</h3>
+            <p>Launches instantly via link. Zero wait time and zero footprint on your device memory.</p>
+        </div>
+        <div class="benefit-card">
+            <h3>🛡️ Zero Permanent Permissions</h3>
+            <p>Unlike standard apps, permissions run on-demand and are never locked permanently in the background.</p>
+        </div>
+        <div class="benefit-card">
+            <h3>🚀 Full Native Experience</h3>
+            <p>Enjoy snappy workflows, fluid interfaces, and high-speed processing just like a standard app.</p>
+        </div>
+    </div>
+
+    <!-- Apps Catalog Grid -->
+    <div class="apps-container">
+        
+        <!-- App 1: Share My Location -->
+        <div class="app-card">
+            <div>
+                <img src="Location Share.jpg" alt="Share My Location App Icon" class="app-icon">
+                <div class="app-title">Share My Location</div>
+                <div class="app-desc">Instantly share exact GPS coordinates without saving contacts to phone book and securely without giving permanent tracking permissions.</div>
+            </div>
+            <a href="https://ankurjain30.github.io/Share-Location/" target="_blank" rel="noopener noreferrer" class="btn">Launch App</a>
+        </div>
+
+        <!-- App 2: Universal Scanner -->
+        <div class="app-card">
+            <div>
+                <img src="Scanner Icon.jpg" alt="Universal Scanner App Icon" class="app-icon">
+                <div class="app-title">Universal Scanner</div>
+                <div class="app-desc">A lightning-fast scanner tool for seamless barcodes, QR codes and share information right there using any communicable apps like WhatsApp, Messages etc.</div>
+            </div>
+            <a href="https://ankurjain30.github.io/BarCode-Scanner/" target="_blank" rel="noopener noreferrer" class="btn">Launch App</a>
+        </div>
+
+        <!-- App 3: Trip Expense Manager -->
+        <div class="app-card">
+            <div>
+                <img src="TripExManager.jpg" alt="Trip Expense Manager App Icon" class="app-icon">
+                <div class="app-title">Trip Expense Manager</div>
+                <div class="app-desc">Effortlessly capture, track, review,  split  multi-currency travel expenses for all kind of trips like Friends, Family, Groups etc. smoothly on the go.</div>
+            </div>
+            <a href="https://ankurjain30.github.io/TripExpManager/" target="_blank" rel="noopener noreferrer" class="btn">Launch App</a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Instant Mobile Utilities. Optimized for seamless mobile browser performance.
+    </div>
+
+</body>
+</html>
