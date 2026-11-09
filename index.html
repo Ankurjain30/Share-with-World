@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instant Mobile Utilities | Full Native Power, Zero Installation</title>
+    <meta name="theme-color" content="#07090e">
+    <meta name="description" content="Explore lightweight mobile utilities, then add this page to your home screen for one-tap access.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Mobile Utilities">
+    <title>Instant Mobile Utilities | One-Tap Home Screen Access</title>
 
     <!-- Open Graph / Social Media Preview Meta Tags -->
-    <meta property="og:title" content="Instant Mobile Utilities | Full Native Power, Zero Installation">
-    <meta property="og:description" content="Explore lightweight, zero-installation web utilities and apps built for speed and privacy. Launch instantly right from your browser.">
+    <meta property="og:title" content="Instant Mobile Utilities | One-Tap Home Screen Access">
+    <meta property="og:description" content="Explore lightweight mobile utilities, then add this page to your home screen for one-tap access.">
     <meta property="og:url" content="https://share-with-world.pages.dev/">
     <meta property="og:type" content="website">
     <!-- Note: Replace the image path below with your actual preview banner file name if hosted (e.g., 'preview-banner.jpg') -->
@@ -15,8 +22,8 @@
 
     <!-- Twitter Card Meta Tags (Optional Bonus for Twitter sharing) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Instant Mobile Utilities | Full Native Power, Zero Installation">
-    <meta name="twitter:description" content="Explore lightweight, zero-installation web utilities and apps built for speed and privacy.">
+    <meta name="twitter:title" content="Instant Mobile Utilities | One-Tap Home Screen Access">
+    <meta name="twitter:description" content="Explore lightweight mobile utilities, then add this page to your home screen for one-tap access.">
     <meta name="twitter:image" content="https://share-with-world.pages.dev/TripExManager.jpg">
 
     <style>
@@ -97,6 +104,44 @@
             color: var(--text-muted);
             font-size: 1rem;
             line-height: 1.6;
+        }
+
+        .install-card {
+            width: 100%;
+            max-width: 720px;
+            margin: -20px 0 40px;
+            padding: 24px;
+            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+
+        .install-card h2 {
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        .install-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .install-button {
+            display: none;
+            margin: 16px auto 0;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .install-button.visible {
+            display: inline-block;
         }
 
         /* Value Propositions Grid */
@@ -387,14 +432,20 @@
         <div class="badge">Smart Mobile Utilities by Utility Apps</div>
         <h1>Instant Tools. Zero Clutter.</h1>
         <h2>Tired of heavy app store downloads, permanent background tracking, and wasting phone storage?</h2>
-        <p>Experience the next generation of web-powered utilities fully loaded 100% Free. Instant native performance, zero installations, and total privacy control right inside your browser.</p>
+        <p>Experience the next generation of web-powered utilities, completely free. Open them in your browser, or add this page to your home screen for one-tap access.</p>
     </div>
+
+    <section class="install-card" aria-labelledby="install-heading">
+        <h2 id="install-heading">Add this page to your home screen</h2>
+        <p id="install-instructions">Install this page for quick access to the utility suite. On your phone, use your browser's menu and choose “Add to Home screen” or “Install app.”</p>
+        <button class="install-button" id="install-button" type="button">Install app</button>
+    </section>
 
     <!-- Key Benefits -->
     <div class="benefits-grid">
         <div class="benefit-card">
             <h3>⚡ Instant Access</h3>
-            <p>Launches seamlessly via web link with zero wait times and zero footprint on your device storage.</p>
+            <p>Open the utility suite from a home screen shortcut or launch it directly in your browser.</p>
         </div>
         <div class="benefit-card">
             <h3>🛡️ Complete Privacy</h3>
@@ -525,5 +576,46 @@
         <a href="privacy.html">Privacy Policy</a>
     </div>
 
+    <script>
+        const installButton = document.getElementById("install-button");
+        const installInstructions = document.getElementById("install-instructions");
+        const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
+            || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const isStandalone = window.matchMedia("(display-mode: standalone)").matches
+            || navigator.standalone === true;
+        let installPrompt;
+
+        if (isStandalone) {
+            installInstructions.textContent = "This page is already installed. Open it from your home screen for quick access.";
+        } else if (isIos) {
+            installInstructions.textContent = "In Safari, tap the Share button, then choose “Add to Home Screen” and tap Add.";
+        }
+
+        window.addEventListener("beforeinstallprompt", (event) => {
+            event.preventDefault();
+            installPrompt = event;
+            installButton.classList.add("visible");
+        });
+
+        installButton.addEventListener("click", async () => {
+            if (!installPrompt) return;
+
+            installPrompt.prompt();
+            await installPrompt.userChoice;
+            installPrompt = null;
+            installButton.classList.remove("visible");
+        });
+
+        window.addEventListener("appinstalled", () => {
+            installButton.classList.remove("visible");
+            installInstructions.textContent = "This page is installed. Open it from your home screen for quick access.";
+        });
+
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./service-worker.js");
+            });
+        }
+    </script>
 </body>
 </html>

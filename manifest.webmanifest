@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "Instant Mobile Utilities",
+  "short_name": "Utilities",
+  "description": "Quick access to the Instant Mobile Utilities web apps.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07090e",
+  "theme_color": "#07090e",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
