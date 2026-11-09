@@ -168,6 +168,41 @@
             margin-bottom: 40px;
         }
 
+        .native-apps-section {
+            width: 100%;
+            max-width: 960px;
+            margin-top: 16px;
+        }
+
+        .native-apps-section .section-title {
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .platform-label {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 5px 12px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            background: rgba(139, 92, 246, 0.1);
+            color: #c4b5fd;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .native-benefits {
+            margin-top: 8px;
+            margin-bottom: 40px;
+        }
+
         .app-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -207,6 +242,7 @@
         }
 
         .app-icon {
+            display: block;
             width: 80px;
             height: 80px;
             border-radius: 20px;
@@ -383,6 +419,59 @@
         </div>
 
     </div>
+
+    <!-- Native Android Apps -->
+    <section class="native-apps-section" aria-labelledby="native-apps-heading">
+        <div class="section-title" id="native-apps-heading">
+            Native Android Apps
+            <span>2 Apps</span>
+        </div>
+        <p class="section-description">Discover dedicated Android apps built to make everyday tasks more capable and convenient on your device.</p>
+
+        <div class="apps-container">
+            <article class="app-card">
+                <div>
+                    <img src="TripExManager.jpg" alt="Trip Expense Manager App Icon" class="app-icon" loading="lazy" decoding="async">
+                    <span class="platform-label">Native Android</span>
+                    <div class="app-title">Trip Expense Manager</div>
+                    <div class="app-desc">Effortlessly track, review, and split multi-currency travel expenses on the go for friends, family, and group trips.</div>
+                </div>
+                <a href="https://drive.google.com/file/d/1PFB2zHFNM1btmiFVyCb_lN4-LwK7oo1g/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn">
+                    Download Android App
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+            </article>
+
+            <article class="app-card">
+                <div>
+                    <img src="AI%20Media%20Manager.png" alt="AI Media Manager App Icon" class="app-icon" loading="lazy" decoding="async">
+                    <span class="platform-label">Native Android</span>
+                    <div class="app-title">AI Media Manager</div>
+                    <div class="app-desc">A smarter way to manage your media, with AI-powered tools designed to help make your media workflow easier.</div>
+                </div>
+                <a href="https://drive.google.com/file/d/1LO0Ccub6riQpjxL-USSQiyAYWs-oYVLn/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn">
+                    Download Android App
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+            </article>
+        </div>
+
+        <div class="section-title">Why Native Apps?</div>
+        <div class="benefits-grid native-benefits">
+            <div class="benefit-card">
+                <h3>📱 Built for Android</h3>
+                <p>Designed for the Android experience, with familiar interactions that feel at home on your device.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>⚡ Smooth, Responsive Use</h3>
+                <p>Native app experiences can make common tasks feel quick and natural, with interfaces tailored for mobile.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>🔧 Device Features</h3>
+                <p>Native apps can work closely with Android capabilities to support useful, device-aware features.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Idea Sharing Section -->
     <section class="idea-sharing" aria-labelledby="idea-sharing-heading">
