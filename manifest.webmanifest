@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Instant Mobile Utilities",
-  "short_name": "Utilities",
+  "name": "Utility Apps",
+  "short_name": "Utility Apps",
   "description": "Quick access to the Instant Mobile Utilities web apps.",
   "start_url": "./",
   "scope": "./",
