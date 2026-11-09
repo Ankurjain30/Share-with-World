@@ -178,6 +178,18 @@
             cursor: pointer;
         }
 
+        .install-dialog-okay {
+            margin: 16px 8px 0 0;
+            padding: 10px 16px;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         /* Value Propositions Grid */
         .benefits-grid {
             display: grid;
@@ -479,6 +491,7 @@
         <h2 id="install-dialog-heading">Add this page to your home screen</h2>
         <p id="install-dialog-instructions"></p>
         <button class="install-button" id="dialog-install-button" type="button">Install app</button>
+        <button class="install-dialog-okay" id="install-dialog-okay" type="button">Okay</button>
         <button class="install-dialog-close" id="install-dialog-close" type="button">Not now</button>
     </dialog>
 
@@ -623,6 +636,7 @@
         const installDialog = document.getElementById("install-dialog");
         const dialogInstructions = document.getElementById("install-dialog-instructions");
         const dialogInstallButton = document.getElementById("dialog-install-button");
+        const okayDialogButton = document.getElementById("install-dialog-okay");
         const closeDialogButton = document.getElementById("install-dialog-close");
         const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
             || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -677,10 +691,13 @@
 
         installButton.addEventListener("click", promptToInstall);
         dialogInstallButton.addEventListener("click", promptToInstall);
-        closeDialogButton.addEventListener("click", () => {
+        function dismissInstallDialog() {
             sessionStorage.setItem("install-dialog-dismissed", "true");
             installDialog.close();
-        });
+        }
+
+        okayDialogButton.addEventListener("click", dismissInstallDialog);
+        closeDialogButton.addEventListener("click", dismissInstallDialog);
         installDialog.addEventListener("cancel", () => {
             sessionStorage.setItem("install-dialog-dismissed", "true");
         });
