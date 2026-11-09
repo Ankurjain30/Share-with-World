@@ -328,11 +328,46 @@
             text-decoration: underline;
         }
 
+        .privacy-section {
+            width: 100%;
+            max-width: 960px;
+            margin-top: 24px;
+            padding: 32px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .privacy-section h2 {
+            margin-bottom: 12px;
+            font-size: 1.35rem;
+            color: var(--text-main);
+        }
+
+        .privacy-section p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .privacy-section a,
+        .footer a {
+            color: #60a5fa;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .privacy-section a:hover,
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
         .footer {
             margin-top: 48px;
             text-align: center;
             font-size: 0.82rem;
             color: var(--text-muted);
+            line-height: 1.8;
         }
 
         @media (max-width: 768px) {
@@ -479,9 +514,15 @@
         <p>Share your concept with us, and we'll bring it to life completely free of charge. <br><a href="mailto:n.utility.apps@gmail.com?subject=App%20Idea">n.utility.apps@gmail.com</a></p>
     </section>
 
+    <section class="privacy-section" aria-labelledby="privacy-heading">
+        <h2 id="privacy-heading">Privacy</h2>
+        <p>Trip Expense Manager sends expense information and receipt images to our servers to provide the app's service. Our other apps keep data on your device. Read our <a href="privacy.html">Privacy Policy</a> for details about data use, storage, and deletion.</p>
+    </section>
+
     <!-- Footer -->
     <div class="footer">
-        &copy; 2026 Instant Mobile Utilities. Optimized for seamless mobile browser performance.
+        &copy; 2026 Instant Mobile Utilities. Optimized for seamless mobile browser performance.<br>
+        <a href="privacy.html">Privacy Policy</a>
     </div>
 
 </body>
