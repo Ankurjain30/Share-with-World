@@ -144,6 +144,40 @@
             display: inline-block;
         }
 
+        .install-dialog {
+            width: min(460px, calc(100% - 32px));
+            margin: auto;
+            padding: 24px;
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+
+        .install-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .install-dialog h2 {
+            margin-bottom: 12px;
+        }
+
+        .install-dialog p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .install-dialog-close {
+            margin-top: 16px;
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
         /* Value Propositions Grid */
         .benefits-grid {
             display: grid;
@@ -441,6 +475,13 @@
         <button class="install-button" id="install-button" type="button">Install app</button>
     </section>
 
+    <dialog class="install-dialog" id="install-dialog" aria-labelledby="install-dialog-heading">
+        <h2 id="install-dialog-heading">Add this page to your home screen</h2>
+        <p id="install-dialog-instructions"></p>
+        <button class="install-button" id="dialog-install-button" type="button">Install app</button>
+        <button class="install-dialog-close" id="install-dialog-close" type="button">Not now</button>
+    </dialog>
+
     <!-- Key Benefits -->
     <div class="benefits-grid">
         <div class="benefit-card">
@@ -579,36 +620,77 @@
     <script>
         const installButton = document.getElementById("install-button");
         const installInstructions = document.getElementById("install-instructions");
+        const installDialog = document.getElementById("install-dialog");
+        const dialogInstructions = document.getElementById("install-dialog-instructions");
+        const dialogInstallButton = document.getElementById("dialog-install-button");
+        const closeDialogButton = document.getElementById("install-dialog-close");
         const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent)
             || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const isAndroid = /android/i.test(navigator.userAgent);
         const isStandalone = window.matchMedia("(display-mode: standalone)").matches
             || navigator.standalone === true;
         let installPrompt;
 
         if (isStandalone) {
             installInstructions.textContent = "This page is already installed. Open it from your home screen for quick access.";
+            dialogInstructions.textContent = installInstructions.textContent;
         } else if (isIos) {
             installInstructions.textContent = "In Safari, tap the Share button, then choose “Add to Home Screen” and tap Add.";
+            dialogInstructions.textContent = `${installInstructions.textContent} If this page opened in another app, open it in Safari first.`;
+        } else if (isAndroid) {
+            installInstructions.textContent = "If an Install app button appears here, tap it. Otherwise, open your browser menu and choose “Install app” or “Add to Home screen.”";
+            dialogInstructions.textContent = installInstructions.textContent;
+        } else {
+            dialogInstructions.textContent = "On your phone, open this page in Safari or Chrome and use the browser's Share or menu option to add it to your home screen.";
+        }
+
+        if ((isIos || isAndroid) && !isStandalone
+            && !sessionStorage.getItem("install-dialog-dismissed")) {
+            installDialog.showModal();
+        }
+
+        function setInstallButtonVisibility(isVisible) {
+            installButton.classList.toggle("visible", isVisible);
+            dialogInstallButton.classList.toggle("visible", isVisible);
         }
 
         window.addEventListener("beforeinstallprompt", (event) => {
             event.preventDefault();
             installPrompt = event;
-            installButton.classList.add("visible");
+            setInstallButtonVisibility(true);
         });
 
-        installButton.addEventListener("click", async () => {
+        async function promptToInstall() {
             if (!installPrompt) return;
 
-            installPrompt.prompt();
-            await installPrompt.userChoice;
+            await installPrompt.prompt();
+            const choice = await installPrompt.userChoice;
             installPrompt = null;
-            installButton.classList.remove("visible");
+            setInstallButtonVisibility(false);
+            if (choice.outcome === "accepted") {
+                installInstructions.textContent = "This page is installed. Open it from your home screen for quick access.";
+                dialogInstructions.textContent = installInstructions.textContent;
+                sessionStorage.setItem("install-dialog-dismissed", "true");
+                if (installDialog.open) installDialog.close();
+            }
+        }
+
+        installButton.addEventListener("click", promptToInstall);
+        dialogInstallButton.addEventListener("click", promptToInstall);
+        closeDialogButton.addEventListener("click", () => {
+            sessionStorage.setItem("install-dialog-dismissed", "true");
+            installDialog.close();
+        });
+        installDialog.addEventListener("cancel", () => {
+            sessionStorage.setItem("install-dialog-dismissed", "true");
         });
 
         window.addEventListener("appinstalled", () => {
-            installButton.classList.remove("visible");
+            setInstallButtonVisibility(false);
             installInstructions.textContent = "This page is installed. Open it from your home screen for quick access.";
+            dialogInstructions.textContent = installInstructions.textContent;
+            sessionStorage.setItem("install-dialog-dismissed", "true");
+            if (installDialog.open) installDialog.close();
         });
 
         if ("serviceWorker" in navigator) {
