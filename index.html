@@ -492,7 +492,7 @@
         <p id="install-dialog-instructions"></p>
         <button class="install-button" id="dialog-install-button" type="button">Install app</button>
         <button class="install-dialog-okay" id="install-dialog-okay" type="button">Okay</button>
-        <button class="install-dialog-close" id="install-dialog-close" type="button">Not now</button>
+        <button class="install-dialog-close" id="install-dialog-close" type="button" hidden>Not now</button>
     </dialog>
 
     <!-- Key Benefits -->
@@ -672,6 +672,10 @@
             event.preventDefault();
             installPrompt = event;
             setInstallButtonVisibility(true);
+            if (isAndroid) {
+                okayDialogButton.hidden = true;
+                closeDialogButton.hidden = false;
+            }
         });
 
         async function promptToInstall() {
